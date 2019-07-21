@@ -4,38 +4,35 @@ using namespace std;
 
 /****************************************
 
-                 C++ 重写
-       1. Override,重写主要发生在继承关系中
-       2. 主要重写的方法体，方法的参数和返回值必须一致
+                 C++ 重载
+       1. Overload,重载主要发生在同一作用域中
+       2. 和重写不同，重载只要求方法名一致，方法的参数和返回值可以不同
 
 *****************************************/
 
 
 class Fruit{
     public:
-        void foo(){
-            cout << "Fruit::foo被调用" << endl;
+        double add_tare_and_core(double tareWeight, double coreWeight){
+            cout << "double" << endl;
+            return tareWeight + coreWeight;
+        }
+        int add_tare_and_core(int tareWeight, int coreWeight){  // 重载上面的函数
+            cout << "int" << endl;
+            return tareWeight + coreWeight;
         }
 };
 
-
-class Banana:public Fruit{
-    public:
-        void foo(){   //重写基类的foo方法，要求返回值和参数个数、参数类型完全一致
-            cout << "Banana::foo被调用" << endl;
-        }
-};
 
 
 int main()
 {
     Fruit fru;
-    Banana ban;
 
-    fru.foo();
-    ban.foo();
+    cout << "重载会根据参数个数和类型来自动调用对应函数" << endl;
+    cout << fru.add_tare_and_core(5.33, 2.81) << endl;
+    cout << fru.add_tare_and_core(5, 3) << endl;
 
-    // 思考和多态的区别和联系
     return 0;
 }
 
