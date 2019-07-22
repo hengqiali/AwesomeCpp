@@ -1,3 +1,4 @@
+
 #include <iostream>
 
 using namespace std;
@@ -16,8 +17,15 @@ using namespace std;
 ///////////    函数模板 /////////////////
 
 template <class T>   //模板， T可以自己替换任意类名
+
 T addOperator(T x1, T x2){
     return x1 + x2;
+}
+
+template <class FIRST, class SECOND>  //定义了两种模板
+
+FIRST smaller(FIRST a, SECOND b){
+    return (a < b ? a : b);
 }
 
 int main()
@@ -29,5 +37,9 @@ int main()
     //此时模板可以解决此问题。思考一下，模板有时能解决函数重载的一部分应用
     cout << "a + b = " << addOperator(a, b) << endl;
     cout << "c + d = " << addOperator(c, d) << endl;
+
+    cout << "the smaller number is " << smaller(a, c) << endl;
+    cout << "the smaller number is " << smaller(c, b) << endl;
+    return 0;
 }
 
