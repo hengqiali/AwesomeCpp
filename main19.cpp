@@ -6,3 +6,11 @@
   
 2. https://blog.csdn.net/rain_qingtian/article/details/10615575
   讲解了智能指针的数组版
+
+
+/*
+
+reset() 相当于释放当前所控制的对象
+reset(T* p) 相当于释放当前所控制的对象，然后接管p所指的对象
+
+*/
