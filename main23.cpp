@@ -1,8 +1,8 @@
-#include <iostream>
-using namespace std;
 
 /*******************************************
-                    C++ static
+                         C++ static
+    https://www.cnblogs.com/BeyondAnyTime/archive/2012/06/08/2542315.html
+                    
         对于一个完整的程序，在内存中的分布情况如下图：　
          【代码区】   【全局数据区】  【堆区】   【栈区】
 一般程序的由new产生的动态数据存放在堆区，函数内部的自动变量存放在栈区。
@@ -44,6 +44,42 @@ using namespace std;
             • 调用静态成员函数，可以用成员访问操作符(.)和(->)为一个类的对象或指向类对象的指针调用静态成员函数，也可以直接使用如下格式：
             ＜类名＞::＜静态成员函数名＞（＜参数表＞） 调用类的静态成员函数。
 **********************************************/
+#include <iostream>
+using namespace std;
+class Myclass
+{
+public:
+    Myclass(int a,int b,int c);
+    void GetSum();
+private:
+    int a,b,c;
+    static int Sum;//声明静态数据成员
+};
+int Myclass::Sum=0;//定义并初始化静态数据成员
+
+Myclass::Myclass(int a,int b,int c)
+{
+    this->a=a;
+    this->b=b;
+    this->c=c;
+    Sum+=a+b+c;
+}
+
+void Myclass::GetSum()
+{
+    cout<<"Sum="<<Sum<<endl;
+}
+
+int main()
+{
+    Myclass M(1,2,3);
+    M.GetSum();
+    Myclass N(4,5,6);
+    N.GetSum();
+    M.GetSum();
+
+    return 0;
+}
 
 
 
