@@ -43,7 +43,7 @@ private:
 int main()
 {
     CBase base(54,6);   //单独定义基类
-    CChild child(2,3);  //单独定义子类
+    CChild child = CChild(2,3);  //单独定义子类
 
     //base.c;
     child.a;
