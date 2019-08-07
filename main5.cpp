@@ -22,6 +22,7 @@ class CBase{
 public:
     //explicit CBase(){std::cout << "constructors()" << std::endl;}
     CBase(){std::cout << "constructors()" << std::endl;};
+    //CBase() = default;  //等价于CBase(){};
     CBase(int a_, int c_):a(a_), c(c_){std::cout << "constructors(CBase)" << std::endl;}
     virtual void foo(){std::cout << "CBase" << std::endl;}
     //void foo(){std::cout << "CBase" << std::endl;}
