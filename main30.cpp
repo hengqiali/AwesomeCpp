@@ -20,6 +20,7 @@ using namespace std;
 
 https://levphy.github.io/2017/03/23/memory-alignment.html
 https://www.zhihu.com/question/27862634
+https://www.cnblogs.com/Miranda-lym/p/5197805.html  struct\union\class都一样
 */
 
 struct{
