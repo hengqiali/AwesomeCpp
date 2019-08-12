@@ -17,6 +17,9 @@ using namespace std;
 因此a对齐后占用的空间是0x0000~0x0003，b占用的空间是0x0004~0x0007, 然后是short c其大小是2，故从0x0008开始占用两个字节，即0x0008~0x0009。
 此时整个结构体占用的空间是0x0000~0x0009， 占用10个字节，10%4 ！= 0,
 不满足第三个原则，所以需要在后面补充一个字节，即最后内存对齐后占用的空间是0x0000~0x000B，一共12个字节。
+
+https://levphy.github.io/2017/03/23/memory-alignment.html
+https://www.zhihu.com/question/27862634
 */
 
 struct{
