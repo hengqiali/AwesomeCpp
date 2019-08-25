@@ -36,7 +36,7 @@ int main()
 
     //字符串转int
     string s6("1243");
-    int x = std::atoi(s6.c_str());  // stol(long), stof(float), stod(double) 等
+    int x = std::atoi(s6.c_str());  // atol(long), atof(float), atod(double) 等
     cout << x << endl;
 
 
