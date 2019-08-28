@@ -1,10 +1,10 @@
 #include <iostream>
-
+#include <exception>
 using namespace std;
 
 /****************************************
 
-            C++ Òì³£
+            C++ å¼‚å¸¸
 
 *****************************************/
 
@@ -13,28 +13,28 @@ int main()
     int x;
     int y;
 
-    cout << "ÇëÊäÈëÕûÊı£º" << endl;
+    cout << "è¯·è¾“å…¥æ•´æ•°ï¼š" << endl;
     cout << "x = ";
     cin >> x;
     cout << "y = ";
     cin >> y;
 
-    try   //try°üº¬ĞèÒªÒì³£¼ì²éµÄ´úÂë¿é
+    try   //tryåŒ…å«éœ€è¦å¼‚å¸¸æ£€æŸ¥çš„ä»£ç å—
     {
         if(x < y)
-            throw 0;  //Å×³öÒì³£1
+            throw 0;  //æŠ›å‡ºå¼‚å¸¸1
         else
-            throw 1;  //Å×³öÒì³£2
+            throw 1;  //æŠ›å‡ºå¼‚å¸¸2
     }
-    catch(int e)  //²¶»ñÒì³£
+    catch(int e)  //æ•è·å¼‚å¸¸  catch(std::exception e)   cout << e.what();
     {
-        switch(e) //¸ù¾İÒì³£ÀàĞÍ·Ö±ğ´¦Àí
+        switch(e) //æ ¹æ®å¼‚å¸¸ç±»å‹åˆ†åˆ«å¤„ç†
         {
         case 0:
-            cout << "x Ğ¡ÓÚ y" << endl;
+            cout << "x å°äº y" << endl;
             break;
         case 1:
-            cout << "x ´óÓÚ y" << endl;
+            cout << "x å¤§äº y" << endl;
             break;
         }
     }
