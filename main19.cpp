@@ -11,7 +11,9 @@
   
   2》unique_ptr 是auto_ptr的改进
     提供了特殊方法创建数组对象，并可自动调用delete[]来释放内存
-    但unique_ptr也是移交所有权
+    unique_ptr不可拷贝和赋值，这和auto_ptr不同，但其允许在即将销毁时拷贝或者赋值，常见于返回值
+    unique_ptr使用release()方法可以释放对内存的占有权，可以利用此方法将所有权转移给另一个指针
+    或者使用p.reset(p2.release)来让p获取p2内存的占有权
     
   3》shared_ptr顾名思义就是共享所有权，使用强引用来计数，只有最后一个引用结束时才会自动释放资源
     析构时默认调用delete释放资源，当指向一组对象时需自定义delete[]来释放资源
@@ -19,6 +21,9 @@
       1）不同的指针指向同一个资源，当然这个问题所有的智能指针都有
       2）循环引用导致资源不能释放
   4》weak_ptr引入弱引用计数解决资源不能释放
+  weak_ptr使用shared_ptr来创建，来共享但不拥有资源，其不支持*和->来操作。
+  当shared_ptr创建weak_ptr对象时，shared_ptr的强引用计数不会改变，会添加一个弱引用计数，weak_ptr会继承其计数
+  当shared_ptr销毁时，不管weak_ptr如何，直接销毁
     
   
 2. https://blog.csdn.net/rain_qingtian/article/details/10615575
