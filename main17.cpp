@@ -13,6 +13,7 @@ using namespace std;
 3. 命名空间具有不连续性，即namespace nsp{}在nsp不存在时创建nsp，在nsp存在时打开nsp
 4. 命名空间的不连续性使得我们可以将声明和实现分隔。既可以在域内实现，也可以在域外实现
 5. 嵌套命名空间也被允许
+6. 内联命名空间https://blog.csdn.net/craftsman1970/article/details/82872497
 
 *****************************************/
 namespace first_space{
