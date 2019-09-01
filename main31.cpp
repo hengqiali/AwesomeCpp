@@ -42,6 +42,7 @@ int main()
     cout << sizeof (sss) << endl;  //4
     cout << sizeof (new string()) << endl; //4
     //此时的sizeof里面传的其实是char *，'\0'也算一个字符
+    //字符串中的"\0"问题  https://blog.csdn.net/jesse621/article/details/8033183
     cout << sizeof ("Hello") << endl; //6
     cout << sizeof ("He") << endl; //3
     cout << sizeof ("H") << endl;  //2
