@@ -6,7 +6,8 @@ using namespace std;
 int main()
 {
     /******************    enum枚举 --符号常量集合     **********************/
-    /* https://www.runoob.com/w3cnote/cpp-enums-intro-and-strongly-typed.html */
+    /* https://www.runoob.com/w3cnote/cpp-enums-intro-and-strongly-typed.html 
+    https://www.cnblogs.com/ForFreeDom/archive/2012/03/22/2412055.html*/
     enum Color {RED = 50, GREEN = 1, BLUE = 25};   //枚举类型，符号常量外围可见
     //enum {RED = 50, GREEN = 1, BLUE = 25};   //Color可省略
 
