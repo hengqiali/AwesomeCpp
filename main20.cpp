@@ -14,8 +14,10 @@ using namespace std;
         
                 C++ const与成员函数
         https://www.cnblogs.com/wintergrass/archive/2011/04/15/2015020.html
+        https://blog.csdn.net/audience_fzn/article/details/80455236
         const放在返回值类型前面修饰返回值为常量，放在函数后面修饰该函数为常量函数。
-        在类中将成员函数修饰为const表明在该函数体内，不能修改对象的数据成员而且不能调用非const函数。
+        在类中将成员函数修饰为const，const修饰this指针指向的对象，这也就保证调用这个const成员函数的对象在内部不会被改变
+        表明在该函数体内，不能修改对象的数据成员而且不能调用非const函数。
         为什么不能调用非const函数？因为非const函数可能修改数据成员，const成员函数是不能修改数据成员的，
         所以在const成员函数内只能调用const函数
         
