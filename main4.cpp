@@ -12,6 +12,22 @@ using namespace std;
     3. 析构函数需要定义为虚函数，这样在实现多态时才能调用子类的析构函数；否则只会调用父类的析构函数
         非多态时，满足1和2
     4. Fruit *f;不会调用构造函数
+    5.继承访问控制
+             基类中      继承方式             子类中
+
+          public     ＆ public继承        => public
+          public     ＆ protected继承     => protected  
+          public     ＆ private继承       => private
+
+          protected  ＆ public继承        => protected
+          protected  ＆ protected继承     => protected  
+          protected  ＆ private继承       => private
+
+          private    ＆ public继承        => 子类无权访问
+          private    ＆ protected继承     => 子类无权访问
+          private    ＆ private继承       => 子类无权访问
+      https://blog.csdn.net/helainthus/article/details/51452247
+
 
 *****************************************/
 
