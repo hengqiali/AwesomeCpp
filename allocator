@@ -1,0 +1,6 @@
+《C++ Primer》  new和delete将内存申请释放和对象构造析构联系在一起，同时如果定义数组的话，那么整块内存的对象的构造析构都是一样的。
+那么，为了在一块内存上按需构造函数，需要将内存申请和对象构造分离。所以出现了allocator,头文件<memory>
+
+https://blog.csdn.net/u012333003/article/details/22104939
+
+例子：  https://www.geeksforgeeks.org/stdallocator-in-cpp-with-examples/
