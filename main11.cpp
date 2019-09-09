@@ -5,10 +5,14 @@ using namespace std;
 
 /****************************************
 
-                 C++ ²Ù×÷·ûÖØÔØ
-       C++²Ù×÷·ûÖØÔØÄÜ°ïÖúÔËËã·û¶ÔÎÒÃÇ×Ô¶¨ÒåµÄÀàĞÍ½øĞĞ²Ù×÷
-       1. ²Ù×÷·ûÖØÔØÊµÏÖÎªÀà³ÉÔ±º¯Êı
-       2. ²Ù×÷·ûÖØÔØÊµÏÖÎª·ÇÀà³ÉÔ±º¯Êı(È«¾Öº¯Êı)
+                 C++ æ“ä½œç¬¦é‡è½½
+       C++æ“ä½œç¬¦é‡è½½èƒ½å¸®åŠ©è¿ç®—ç¬¦å¯¹æˆ‘ä»¬è‡ªå®šä¹‰çš„ç±»å‹è¿›è¡Œæ“ä½œ
+       1. æ“ä½œç¬¦é‡è½½å®ç°ä¸ºç±»æˆå‘˜å‡½æ•°
+       2. æ“ä½œç¬¦é‡è½½å®ç°ä¸ºéç±»æˆå‘˜å‡½æ•°(å…¨å±€å‡½æ•°)
+       
+       é‡è½½[]å’Œ()
+       https://blog.csdn.net/neonlight/article/details/6065196
+       https://blog.csdn.net/easylovecsdn/article/details/65643295
 
 *****************************************/
 
@@ -25,19 +29,27 @@ class NumberOp{
         void setNum(double x_){
             x = x_;
         }
-        NumberOp operator+(NumberOp a);     //1. ²Ù×÷·ûÖØÔØÊµÏÖÎªÀà³ÉÔ±º¯Êı
+        NumberOp operator+(NumberOp a);     //1. æ“ä½œç¬¦é‡è½½å®ç°ä¸ºç±»æˆå‘˜å‡½æ•°
+		NumberOp operator+(double a);
     private:
         double x;
 };
 
-NumberOp NumberOp::operator+(NumberOp a){   //1. ²Ù×÷·ûÖØÔØÊµÏÖÎªÀà³ÉÔ±º¯Êı
+NumberOp NumberOp::operator+(NumberOp a){   //1. æ“ä½œç¬¦é‡è½½å®ç°ä¸ºç±»æˆå‘˜å‡½æ•°
     NumberOp newOp;
     newOp.setNum(getNum() + a.x);
 
     return newOp;
 }
 
-NumberOp operator*(NumberOp a, NumberOp b){ //2. ²Ù×÷·ûÖØÔØÊµÏÖÎª·ÇÀà³ÉÔ±º¯Êı(È«¾Öº¯Êı)
+NumberOp NumberOp::operator+(double a){   //1. æ“ä½œç¬¦é‡è½½å®ç°ä¸ºç±»æˆå‘˜å‡½æ•°
+    NumberOp newOp;
+    newOp.setNum(getNum() + a);
+
+    return newOp;
+}
+
+NumberOp operator*(NumberOp a, NumberOp b){ //2. æ“ä½œç¬¦é‡è½½å®ç°ä¸ºéç±»æˆå‘˜å‡½æ•°(å…¨å±€å‡½æ•°)
     NumberOp newOp;
     newOp.setNum(a.getNum() * b.getNum());
     return newOp;
@@ -46,12 +58,93 @@ NumberOp operator*(NumberOp a, NumberOp b){ //2. ²Ù×÷·ûÖØÔØÊµÏÖÎª·ÇÀà³ÉÔ±º¯Êı(È«
 int main()
 {
     NumberOp n1(2.5), n2(3.7);
-    NumberOp newN1, newN2;
+    NumberOp newN1, newN2, newN3;
 
-    newN1 = n1 + n2;  //ÖØÔØÔËËã·ûºó¿ÉÒÔÖ±½ÓÊ¹ÓÃ¶ÔÏóÖ±½ÓÏà¼Ó
-    newN2 = n1 * n2;  //ÖØÔØÔËËã·ûºó¿ÉÒÔÖ±½ÓÊ¹ÓÃ¶ÔÏóÖ±½ÓÏà¼Ó
-    cout << "ÔËËã·ûÖØÔØÊµÏÖÎªÀà³ÉÔ±º¯Êı : n1 + n2 = " << newN1.getNum()<< endl;
-    cout << "ÔËËã·ûÖØÔØÊµÏÖÎª·ÇÀà³ÉÔ±º¯Êı : n1 * n2 = " << newN2.getNum() << endl;
+    newN1 = n1 + n2;  //é‡è½½è¿ç®—ç¬¦åå¯ä»¥ç›´æ¥ä½¿ç”¨å¯¹è±¡ç›´æ¥ç›¸åŠ 
+	newN3 = n1 + 10.0;
+    newN2 = n1 * n2;  //é‡è½½è¿ç®—ç¬¦åå¯ä»¥ç›´æ¥ä½¿ç”¨å¯¹è±¡ç›´æ¥ç›¸åŠ 
+    cout << "n1 + n2 = " << newN1.getNum()<< endl;
+	cout << "n1 + 10.0 = " << newN3.getNum()<< endl;
+    cout << "è¿ç®—ç¬¦é‡è½½å®ç°ä¸ºéç±»æˆå‘˜å‡½æ•° : n1 * n2 = " << newN2.getNum() << endl;
 
     return 0;
+}
+
+
+--------------------------------------------------------------------------------------------------
+//é‡è½½[]
+class Vector
+{
+public:
+    Vector(int a1, int a2, int a3, int a4) 
+    {
+        m_nGril[0] = a1 ; m_nGril[1] = a2 ;
+        m_nGril[2] = a3 ; m_nGril[3] = a4 ;
+    }
+    int& operator[](int nIndex) ; // é‡è½½æ•°ç»„ä¸‹æ ‡è¿ç®—ç¬¦"[]"
+private:
+    int m_nGril[4] ;
+};
+//é‡è½½æ•°ç»„ä¸‹æ ‡è¿ç®—ç¬¦"[]"ï¼š
+ 
+int& Vector::operator[](int nIndex)
+{
+    if (nIndex < 0 || nIndex >= 4) // æ•°ç»„è¶Šç•Œæ£€æŸ¥ 
+    {   
+        cout << "æ•°ç»„ä¸‹æ ‡è¶Šç•Œï¼" << endl ;
+        return m_nGril[0] ;
+    }
+    return m_nGril[nIndex];
+}
+//æµ‹è¯•ä»£ç ï¼š
+ 
+int main()
+{
+    Vector vt(0, 1, 2, 3) ;
+    cout << vt[2] << endl ;
+    vt[3] = vt[2] ;
+    cout << vt[3] << endl ;
+    vt[2] = 22 ;
+    cout << vt[2] << endl ;
+    system("Pause");
+    return 0 ;
+}
+
+
+--------------------------------------------------------------------------------------------------
+//é‡è½½()
+  class Matrix
+{
+public:
+    Matrix(int, int) ;
+    int& operator()(int, int) ; // é‡è½½åœ†æ‹¬å·è¿ç®—ç¬¦"()"
+private:
+    int * m_nMatrix ;
+    int m_nRow, m_nCol ;
+};
+Matrix::Matrix(int nRow, int nCol)
+{
+    m_nRow = nRow ;  
+    m_nCol = nCol ;
+    m_nMatrix = new int[nRow * nCol] ;
+    for(int i = 0 ; i < nRow * nCol ; ++i)
+    {
+        *(m_nMatrix + i) = i ;
+    }
+}
+//é‡è½½åœ†æ‹¬å·è¿ç®—ç¬¦"()"ï¼š
+int& Matrix::operator()(int nRow, int nCol)
+{
+    return *(m_nMatrix + nRow * m_nCol + nCol) ; //è¿”å›çŸ©é˜µä¸­ç¬¬nRowè¡Œç¬¬nColåˆ—çš„å€¼
+}
+//æµ‹è¯•ä»£ç ï¼š
+ 
+int main()
+{
+    Matrix mtx(10, 10) ;        //ç”Ÿæˆä¸€ä¸ªçŸ©é˜µå¯¹è±¡aM
+    cout << mtx(3, 4) << endl ; //è¾“å‡ºçŸ©é˜µä¸­ä½äºç¬¬3è¡Œç¬¬4åˆ—çš„å…ƒç´ å€¼
+    mtx(3, 4) = 35 ;            //æ”¹å˜çŸ©é˜µä¸­ä½äºç¬¬3è¡Œç¬¬4åˆ—çš„å…ƒç´ å€¼
+    cout << mtx(3, 4) << endl ;
+    system("Pause") ;
+    return 0 ;
 }
