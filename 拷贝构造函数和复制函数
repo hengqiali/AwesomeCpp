@@ -44,7 +44,8 @@ NumberOp& NumberOp::operator=(NumberOp a){   //1. 操作符重载实现为类成
 }
 
 
-//NumberOp operator*(NumberOp a, NumberOp b){ //2. 操作符重载实现为非类成员函数(全局函数)
+//NumberOp operator*(NumberOp a, NumberOp b){ //2. 操作符重载实现为非类成员函数(全局函数)，全局函数的return也调用的是此类的拷贝构造函数
+//由于都是调用拷贝构造函数，所以即使是局部变量或者形参return，因为调用的是拷贝构造函数，所以不管是返回引用还是非引用都无bug,都是返回一个新的对象
 NumberOp operator*(const NumberOp &a, const NumberOp &b){
     NumberOp newOp;
     newOp.x = a.x * b.x;
