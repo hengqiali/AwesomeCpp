@@ -10,7 +10,7 @@ using namespace std;
        1. 操作符重载实现为类成员函数
        2. 操作符重载实现为非类成员函数(全局函数)
        
-       重载[]和()
+       重载[]和()  注意：[],()只能实现为类成员，[]只能接受一个参数，()可以接收两个参数
        https://blog.csdn.net/neonlight/article/details/6065196
        https://blog.csdn.net/easylovecsdn/article/details/65643295
 
