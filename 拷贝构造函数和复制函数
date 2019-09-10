@@ -1,0 +1,66 @@
+
+#include <math.h>
+#include <limits>
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+
+class NumberOp{
+    public:
+        NumberOp(){}
+		NumberOp(const NumberOp &other)  //不设置引用传参的话每次都会调用拷贝构造函数，所以拷贝构造函数必须是引用
+		{
+			x = other.x;
+			cout << "调用拷贝构造函数" << endl;
+		}
+        NumberOp(double x_){
+            x = x_;
+        }
+		// + ,-等一般返回的不是引用，因为其形参一般设置的是const &,所以必须定义新对象去返回，因为此对象是局部变量，若返回引用就会访问无效地址
+		//如果用this去返回，这会改变原来的值，+的要求一般不要求改变原来的值
+		//为何设置引用，是因为不设置引用传参的话每次都会调用拷贝构造函数，所以拷贝构造函数必须是引用
+		// 同时，返回不是引用的话，返回也会调用拷贝构造函数。
+        NumberOp& operator+(NumberOp a);   //+不能加&，否则n1+n2,n1的值也就直接改变了 
+		// 因为= += -= 的this指针直接返回就行且=本来就要求改变原来的值
+		NumberOp& operator=(NumberOp a);
+		double x;
+};
+
+NumberOp& NumberOp::operator+(NumberOp a){   //左值参数即this默认是引用传递
+    /*NumberOp newOp;
+    newOp.x = x + a.x;
+    return newOp;*/
+	this->x = this->x + a.x; 
+	return (*this);
+}
+NumberOp& NumberOp::operator=(NumberOp a){   //1. 操作符重载实现为类成员函数
+    this->x = a.x;
+	cout << "调用赋值运算" << endl;
+    return (*this);
+}
+
+
+//NumberOp operator*(NumberOp a, NumberOp b){ //2. 操作符重载实现为非类成员函数(全局函数)
+NumberOp operator*(const NumberOp &a, const NumberOp &b){
+    NumberOp newOp;
+    newOp.x = a.x * b.x;
+    return newOp;
+}
+
+int main()
+{
+    NumberOp n1(2.5), n2(3.7);
+    NumberOp newN1, newN2, newN3(n1), newN4;
+	newN4 = n1 * n2;
+	cout << newN4.x << endl;
+	cout << (n1+n2).x << endl;
+	cout << n1.x << endl;
+	//cout <<  n1.x << endl;
+	//n1*n2;
+    //newN1 = n1 + n2;  //重载运算符后可以直接使用对象直接相加
+    //newN2 = n1 * n2;  //重载运算符后可以直接使用对象直接相加
+
+    return 0;
+}
