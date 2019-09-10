@@ -10,6 +10,8 @@ using namespace std;
 class NumberOp{
     public:
         NumberOp(){}
+	// 拷贝构造函数不要声明成 explicit,因为return调用的是隐式拷贝构造函数，因为是return是初始化新对象，所以和复制函数没关系
+	    为什么加explicit返回引用不会提示错误，因为返回引用不会构造新对象。return默认调用隐式拷贝构造函数
 		NumberOp(const NumberOp &other)  //不设置引用传参的话每次都会调用拷贝构造函数，所以拷贝构造函数必须是引用
 		{
 			x = other.x;
