@@ -10,8 +10,8 @@ using namespace std;
 class NumberOp{
     public:
         NumberOp(){}
-	// 拷贝构造函数不要声明成 explicit,因为return调用的是隐式拷贝构造函数，因为是return是初始化新对象，所以和复制函数没关系
-	    为什么加explicit返回引用不会提示错误，因为返回引用不会构造新对象。return默认调用隐式拷贝构造函数
+	    // 拷贝构造函数不要声明成 explicit,因为return调用的是隐式拷贝构造函数，因为是return是初始化新对象，所以和复制函数没关系
+	    //为什么加explicit返回引用不会提示错误，因为返回引用不会构造新对象。return默认调用隐式拷贝构造函数
 		NumberOp(const NumberOp &other)  //不设置引用传参的话每次都会调用拷贝构造函数，所以拷贝构造函数必须是引用
 		{
 			x = other.x;
@@ -20,17 +20,17 @@ class NumberOp{
         NumberOp(double x_){
             x = x_;
         }
-		// + ,-等一般返回的不是引用，因为其形参一般设置的是const &,所以必须定义新对象去返回，因为此对象是局部变量，若返回引用就会访问无效地址
+		// + ,-等一般返回的不是引用，因为没有必要
 		//如果用this去返回，这会改变原来的值，+的要求一般不要求改变原来的值
 		//为何设置引用，是因为不设置引用传参的话每次都会调用拷贝构造函数，所以拷贝构造函数必须是引用
 		// 同时，返回不是引用的话，返回也会调用拷贝构造函数。
         NumberOp& operator+(NumberOp a);   //+不能加&，否则n1+n2,n1的值也就直接改变了 
 		// 因为= += -= 的this指针直接返回就行且=本来就要求改变原来的值
-		NumberOp& operator=(NumberOp a);
+		NumberOp& operator=(NumberOp a); //必须返回，因为只有返回才能连续赋值，+号也一样，才能连续+和跟赋值运算
 		double x;
 };
 
-NumberOp& NumberOp::operator+(NumberOp a){   //左值参数即this默认是引用传递
+NumberOp& NumberOp::operator+(NumberOp a){   //左值参数即this默认是引用传递，+号没必要带引用
     /*NumberOp newOp;
     newOp.x = x + a.x;
     return newOp;*/
