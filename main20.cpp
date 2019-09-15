@@ -10,7 +10,9 @@ using namespace std;
         1. 当const在*的前面时，允许修改指针p的位置，而不允许修改*p的值
         2. 当const在*的后面时，指针p不能变，*p可以变
         3. 当const在*的前后都有时，指针p不能变，*p也不可以变
-        4. 顶层const表示指针本身是个常量， 底层const表示指针所指对象是一个常量
+        4. 顶层const表示const定义的变量本身是个常量， 底层const表示定义变量所指对象是一个常量
+        https://www.jianshu.com/p/fbbcf11100f6
+        http://wangwlj.com/2018/01/06/CPP_06/
         
                 C++ const与成员函数
         https://www.cnblogs.com/wintergrass/archive/2011/04/15/2015020.html
