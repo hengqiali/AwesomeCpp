@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+
+/*
+1.左值和右值：https://blog.csdn.net/xuyuqingfeng953/article/details/51058236
+			https://www.jianshu.com/p/d19fc8447eaa  本篇返回值和形参传递调用拷贝构造函数和编译器返回值优化那里讲的很牛逼
+2.左值引用和右值引用：https://blog.csdn.net/qianyayun19921028/article/details/80875002
+	为什么要右值引用，右值引用在你需要使用寄存器中的值的时候可以进行右值引用。寄存器的刷新速度很快，
+没有右值引用的话就需要将寄存器中的值拷贝到内存中，在进行使用，这是很浪费时间的。
+	所以右值引用和移动语义主要是提升程序性能的。
+	常量左值引用却是个奇葩，它可以算是一个“万能”的引用类型
+3. 移动语义：移动构造函数和移动赋值函数  https://www.jianshu.com/p/d19fc8447eaa  **核心文，讲的非常全面深入**
+*/
+
+class A {
+public:
+	A& Copy(const A & other) { a = other.a; cout << "Copy" << endl; }
+	int a;
+};
+A getTemp()
+{
+	return A();
+}
+
+int main()
+{
+	const A & aA = getTemp();   //不会报错 而 A& a 会报错  //会调用默认的拷贝赋值，不会调用拷贝构造
+	//将右值转化为左值  直接新建变量然后赋值就可以了
+	int c = 5;
+	int d = c + 1;
+
+	cout << "-------引用左值--------" << endl;
+	
+	int a = 5;
+	int &add_a = a;  //int &add_a = a+1;error不能将右值赋给左值引用；或者 int &add_a = std::move(a+1);error右值不能通过语义移动赋给左值
+
+	cout << "   a  =" << a << "    " << "    &a = " << &a << endl;
+	cout << "add_a =" << add_a << "    " << "&add_a = " << &add_a << endl;
+	cout << "-----------------------" << endl;
+
+	cout << "-------引用右值--------" << endl;
+	int b = 10;
+	// int &&add_b = (b + 1); true
+	int &&add_b = std::move(b);  //int &&add_b = b; error 使用std::move()可以将左值绑定到右值引用
+	cout << "   b  =" << b << "    " << "    &b = " << &b << endl;
+	cout << "add_b =" << add_b << "    " << "&add_b = " << &add_b << endl;
+	add_b++;
+	cout << "add_b++ = " << add_b << "    " << "&add_b++ = " << &add_b << "  b = " << b << "   &b = " << &b << endl;
+	cout << "-----------------------" << endl;
+
+	system("pause");
+	return 0;
+}
