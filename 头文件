@@ -1,0 +1,43 @@
+https://www.runoob.com/w3cnote/cpp-header.html
+
+/***test2.h****/
+
+//int x=5;  //error
+class Test{
+public:
+	int a;
+	int print(){return 1;}
+	int print(int){return 2;}
+	double test();
+	double test2(){return 4.0;}
+};
+//double Test::test(){return 2.0;}  //error
+
+/*****test2.cpp*****/
+
+#include "test2.h"
+
+double Test::test(){return 2.0;}  //true
+
+int add(int a, int b)
+{
+	return a+b + 3;
+}
+
+
+/*****test3.cpp*******/
+
+#include <iostream>
+#include "test2.h"
+using namespace std;
+
+int add(int, int);   //true,先声明符号表，再链接时互找
+
+
+int main()
+{
+	int a = 2, b = 3;
+	cout << add(a, b) << endl;
+
+	Test t;
+}
