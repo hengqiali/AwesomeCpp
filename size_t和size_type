@@ -1,0 +1,6 @@
+https://blog.csdn.net/cs_wangshuo/article/details/60146725
+https://www.jianshu.com/p/164b57134bbc
+在32bit Windows平台上，unsigned和std::vector<int>::size_type有同样的大小，都是32bit
+在64bit Windows平台上，unsigned是32bit，但是std::vector<int>::size_type是64bit
+size_type与string和vector搭配使用，包含在头文件string或者vector
+size_t是全局使用，包含在头文件cstddef 
