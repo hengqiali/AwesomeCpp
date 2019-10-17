@@ -1,3 +1,4 @@
+https://blog.csdn.net/qq_29344757/article/details/76037255  复制构造函数和深拷贝、浅拷贝
 https://blog.csdn.net/u010700335/article/details/39830425
 
 C++中类的拷贝有两种：深拷贝，浅拷贝：当出现类的等号赋值时，即会调用拷贝函数
