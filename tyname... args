@@ -1,0 +1,24 @@
+#include <functional>
+#include <iostream>
+using namespace std;
+
+//https://blog.csdn.net/xs18952904/article/details/85221921
+
+template<typename T>
+void pair_comparer(T a, T b) {
+	cout << "a = " << a << ", b = " << b << "  final" << endl;
+}
+
+//这里typename... 的参数args  代表了上面的普通的模版函数
+template<typename T, typename... Args>
+void pair_comparer(T a, T b, Args... args) {
+	//cout << "args" << args... << endl;
+	cout << "a = " << a << ", b = " << b << endl;
+	pair_comparer(args...);
+}
+
+int main()
+{
+	//args 的参数可以增加   
+	pair_comparer(1, 1, 2, 2, 3, 3, 4, 4); //（1）3,3,{4,4}输出3,3 （2）{4,4}解成4,4,{}调用无参数包的同名函数
+}
