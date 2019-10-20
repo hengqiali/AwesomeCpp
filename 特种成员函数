@@ -1,0 +1,41 @@
+#include <iostream>
+#include <array>
+using namespace std;
+
+
+class Point {
+public:
+	Point() = default;  //在自定义了下面的构造函数后，如果没有此声明，则不会生成默认构造，直接Point p或p{}会出错，此时想要继续使用默认构造，可以使用=default来声明我还要继续使用你编译器默认声明的东西
+	Point(double value) :x(value), y(value) {}
+	constexpr Point(const double &xValue, const double &yValue) noexcept
+		: x(xValue), y(yValue){}
+
+	Point(const Point& other)  //自声明了复制构造函数之后，类不会在自动生成复制构造函数。在声明了移动操作之后，则默认复制构造函数会被删除，但使用=default会复活，
+	{                          //在声明了复制赋值运算符或者析构函数的条件下，仍然生成复制构造函数的行为已被废弃（不是不允许）。复制赋值运算符和此过程一样。
+		x = other.x;
+		y = other.y;
+	}
+	//两种移动操作仅在不包括任何自定义复制、移动或析构存在的情况下才会生成
+	constexpr double xValue() const noexcept { return x; }
+	constexpr double yValue() const noexcept { return y; }
+
+	inline void setX(double newX) noexcept { x = newX; }
+	inline void setY(double newY) noexcept { y = newY; }
+private:
+	double x, y;
+};
+
+int main()
+{
+	//int sz = 0;
+	//const auto arraysize = sz;  //const必须接收一个右值或者已经初始化的值(非const也可)，否则编译出错
+	////std::array<int, arraysize> data1;  //const值不是编译期可知的量，不能用于定义数组尺寸
+	//
+	//const int sz2 = 10;								
+	//constexpr auto arraysize2 = sz2; //constexpr必须接收一个右值或者已经初始化的const值(非const不行)，否则编译出错
+	//std::array<int, arraysize2> data2;  //constexpr是编译期可知的量，可以用于定义数组尺寸
+
+	constexpr Point p1(9.4, 25.0);  //只有加了constexpr才能使用constexpr构造函数返回的编译常量对象，此处不加，依旧不能在编译期知道p1的值
+
+	Point p2;
+}
