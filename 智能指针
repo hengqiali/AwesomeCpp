@@ -14,11 +14,13 @@
     unique_ptr不可拷贝和赋值，这和auto_ptr不同，但其允许在即将销毁时拷贝或者赋值，常见于返回值
     unique_ptr使用release()方法可以释放对内存的占有权，可以利用此方法将所有权转移给另一个指针
     或者使用p.reset(p2.release)来让p获取p2内存的占有权
+    unique_ptr<Test> sptr1( new Test[5],   //这种写法虽然可以通过编译，但是其实相当于new Test,也不能使用sptr1[0]
+        [ ](Test* p) { delete[ ] p; } );   //除非使用unique_ptr<Test []>
     
   3》shared_ptr顾名思义就是共享所有权，使用强引用来计数，只有最后一个引用结束时才会自动释放资源
     析构时默认调用delete释放资源，当指向一组对象时需自定义delete[]来释放资源
-    shared_ptr<Test> sptr1( new Test[5], 
-        [ ](Test* p) { delete[ ] p; } );
+    shared_ptr<Test> sptr1( new Test[5],   
+        [ ](Test* p) { delete[ ] p; } );   
     缺点：
       1）不同的指针指向同一个资源，当然这个问题所有的智能指针都有
       2）循环引用导致资源不能释放
