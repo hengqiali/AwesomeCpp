@@ -1,0 +1,9 @@
+数组引用:
+  const char (&)[N]
+  const char (&a)[N]
+  
+指针的引用：
+  int		i = 5;		// 变量i
+	int*	p = &i;		// 指针p，指向变量i
+	int*&	pr = p;		// 指针的引用，与p指向同一个变量i
+  https://blog.csdn.net/luoweifu/article/details/39119487
