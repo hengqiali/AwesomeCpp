@@ -41,7 +41,8 @@ int main()
 	//cout << pPoint[0].xValue() << endl;
 	std::shared_ptr<Point> p(new Point());  // 当自定了有默认值的二参数构造函数且默认构造函数不工作，new Point和new Point()都会调用这个构造函数并且使用默认值
 											// 当自定了有默认值的二参数构造函数且让默认构造函数工作，此时相同于两个重载的构造函数，且new Point会优先调用默认构造函数，new Point()会调用失败，因为匹配的有两个
-											// 当自定义的二参数构造函数没有默认值时，new Point和new Point()都会调用默认构造函数，但是new Point是随机初始化,new Point()是初始化为0
+        									// 当自定义的二参数构造函数没有默认值时，new Point和new Point()都会调用默认构造函数，但是new Point是随机初始化,new Point()是初始化为0
+	//Point p1(); //注意这块相当于声明了一个函数，返回值是Point,函数名为p1，参数列表为空， new Point或者new Point()这两个都是创建新的对象
 	std::shared_ptr<Point> pf(new Point(5,6));
 	cout << p->xValue() << "\t" << p->yValue() << endl;
 	p.reset(new Point(1, 2));
