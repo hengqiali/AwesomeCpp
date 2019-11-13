@@ -66,7 +66,43 @@ int main()
     b4.d;     //出错
 }
 
-/////////////////////  第二个例子 ///////////////////////
+/////////////////////  第二个例子  //////////////////////
+#include <iostream>
+
+
+using namespace std;
+
+class Test 
+{
+public:
+	Test() :a(0) { cout << "基类构造" << endl; } 
+	virtual ~Test() { cout << "基类析构" << endl; }
+	int a;
+};
+
+class Test2:public Test
+{
+public:
+	Test2() :b(1){ cout << "子类构造" << endl; }
+	virtual ~Test2() { cout << "子类析构" << endl; }
+	int b;
+};
+
+int main()
+{
+	Test t1;
+	Test2 t2;
+	t1 = t2;  //这块没多态，t1基类构造，t2先调用基类构造然后子类构造
+
+	Test *pt1;   //指针不会调用构造，且不显式delete的话，也不会调用析构
+	Test2 *pt2;
+	pt1 = new Test2();  //调用基类构造然后调用子类构造
+	delete pt1;   // 调用子类析构然后调用基类析构
+	return 0;   // t2调用子类析构然后基类析构，t1基类析构
+}
+
+
+/////////////////////  第三个例子 ///////////////////////
 class Fruit{
     public:
         Fruit(){cout << "父类构造函数" << endl;}
