@@ -1,0 +1,87 @@
+#include <iostream>
+#include <fstream>
+#include <cstdio>
+#include <cstdlib>
+#include <string>
+#include <type_traits>
+
+using namespace std;
+
+class Test 
+{
+public:
+	Test()
+	{
+		a = 0;
+	}
+	Test& operator=(const Test& other)
+	{
+		this->a = (other.a + 1);
+		return (*this);
+	}
+	/*Test(const Test& other)
+	{
+		this->a = (other.a + 1);
+	}*/
+	int a;
+};
+
+
+
+int& test2(int &name)  //name是拿了a的引用，a不析构，name拿的内存就不会析构，所以int &c = test2(a)中c相当于一直拿这a的内存直到a被析构
+{
+	name = 77;
+	return name;
+}
+int& test3(int name)  //name是按值传递，且因为是局部变量，在test3结束时name的内存就会被回收，所以name拿的内存就不会析构，所以int &d = test3(b)，d拿的和name的地址一样，但内存会被回收
+{
+	name = 77;
+	return name;
+}
+
+template <typename T>
+const T& addConst(T& other)
+{
+	return static_cast<const T&>(other);
+}
+
+template <typename T>
+add_const_t<T>& addConst2(T& other)
+{
+	return static_cast<add_const_t<T>&>(other);
+}
+
+template <typename T>
+typename remove_reference<T>::type&& MOVE(T&& other)
+{
+	return static_cast<typename remove_reference<T>::type&&>(other);
+}
+
+int main()
+{
+	//int a = 3;
+	//int b = 4;
+	//int &c = test2(a);
+	//int &d = test3(b);
+	//cout << a << endl;
+	//cout << b << endl;
+	//cout << d << endl;
+	//const string cs("5555");
+	//string s2("ttt");
+	//auto& x = addConst(s2);
+	//auto& finals = s2;
+	//auto& x2 = addConst2(s2);
+	//auto& finals2 = s2;
+
+	//int m(5);
+	//MOVE(m);
+	//int &&mm = MOVE(m);   //上面的addConst，addConst2和MOVE的这种强制转换带返回，只是声明了原数据的另一种访问方式，而没有改变原数据，当然，在函数里面改值，肯定会改变原数据
+
+
+	//Test t1();  //注意这块相当于声明了一个函数 new Test或者new Test()这两个都是创建新的对象
+	Test t1;
+	Test t2;
+	t2 = t1;   
+	Test t3 = t2;  //声明了复制赋值，依旧可以使用默认复制构造
+	return 0;
+}
