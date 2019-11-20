@@ -1,1 +1,31 @@
 https://www.cnblogs.com/yanqi0124/p/3808286.html
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	vector<int> v;
+
+	v.reserve(5);
+	for (int i = 0; i < v.capacity(); i++)
+		v.push_back(i);
+	//cout << v.size() << endl << v.capacity() << endl;
+	//for (int i = 0; i < v.size(); i++)
+	//	cout << v[i] << endl;
+
+	vector<int>::reverse_iterator ri = find(v.rbegin(), v.rend(), 3); // 如果ri = v.rbegin.    iterator i = ri.base()的话。就已经向右偏移越界了，记得不也能访问，否在崩溃
+	cout << *ri << endl;
+	vector<int>::iterator ib = ri.base();
+	cout << *ib << endl;
+	vector<int>::iterator ri_ = find(v.begin(), v.end(), 3);
+	cout << *ri_ << endl;
+	/*vector<int>::reverse_iterator ri2 = find(v.rend(), v.rbegin(), 3);  // 对于反向迭代器来说，对rend返回的指针，再++的话就会向左越界
+	cout << *ri2 << endl;*/
+	vector<int>::iterator ri2_ = find(v.end(), v.begin(), 3);  //对于迭代器来说，对end返回的指针，再++的话就会向右越界
+	cout << *ri2_ << endl;
+
+
+	return 0;
+}
