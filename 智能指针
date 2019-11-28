@@ -9,21 +9,38 @@
     2）不能指向一组对象
     3）不能和STL容器共同使用
   
+  C++11的三种智能指针都在<memory>头文件中
   2》unique_ptr 是auto_ptr的改进
-    提供了特殊方法创建数组对象，并可自动调用delete[]来释放内存
-    unique_ptr不可拷贝和赋值，这和auto_ptr不同，但其允许在即将销毁时拷贝或者赋值，常见于返回值
+    默认的删除函数是delete,自定义的删除器需要作为unique_ptr类型的一部分
+    提供了特殊方法unique_ptr<T[]>创建数组对象，并自动调用delete[]来释放内存
+    unique_ptr不可拷贝和赋值，正如其名字一样，这和auto_ptr不同，其可以避免因为复制和赋值导致所有权移交而带来的bug，但其允许在即将销毁时拷贝或者赋值，常见于返回值
     unique_ptr使用release()方法可以释放对内存的占有权，可以利用此方法将所有权转移给另一个指针
     或者使用p.reset(p2.release)来让p获取p2内存的占有权
     unique_ptr<Test> sptr1( new Test[5],   //这种写法虽然可以通过编译，但是其实相当于new Test,也不能使用sptr1[0]
         [ ](Test* p) { delete[ ] p; } );   //除非使用unique_ptr<Test []>
     
   3》shared_ptr顾名思义就是共享所有权，使用强引用来计数，只有最后一个引用结束时才会自动释放资源
-    析构时默认调用delete释放资源，当指向一组对象时需自定义delete[]来释放资源
-    shared_ptr<Test> sptr1( new Test[5],   
+    析构时默认调用delete释放资源，当指向一组对象时需自定义delete[]来释放资源，自定义的删除器不需要作为shared_ptr类型的一部分
+    shared_ptr不支持shared_ptr<T[]>的写法，其虽然可以指向一组对象，并使用自定义的delete[]删除这组对象，但全然没有意义
+    因为shared_ptr未提供operator[]操作符，只能通过复杂的指针计算来访问，且array、vector那么方便，所以全然无意义
+    shared_ptr<Test> sptr1( new Test[5],   // 这种写法无意义
         [ ](Test* p) { delete[ ] p; } );   
+    如果需要指向一组对象的智能指针，可以使用Boost中的shared_array：shared_array<char> text(new char[1000]);
     缺点：
       1）不同的指针指向同一个资源，当然这个问题所有的智能指针都有
       2）循环引用导致资源不能释放
+     
+    shared_array与shared_ptr的区别如下：
+    1：构造函数接受的指针p必须是new[]的结果，而不能是new表达式。
+    2：提供operator[]操作符重载，可以像普通数组一样用下标访问元素，shared_ptr却没有下标访问运算符
+    3：没有*、->操作符重载，因为shared_array持有的不是一个普通指针。
+    4：析构函数使用delete[]释放资源，而不是delete。
+
+ 
+————————————————
+版权声明：本文为CSDN博主「ajioy」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/ajioy/article/details/7376987
+      
   4》weak_ptr引入弱引用计数解决资源不能释放
   weak_ptr使用shared_ptr来创建，来共享但不拥有资源，其不支持*和->来操作。
   当shared_ptr创建weak_ptr对象时，shared_ptr的强引用计数不会改变，会添加一个弱引用计数，weak_ptr会继承其计数
