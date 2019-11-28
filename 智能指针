@@ -36,10 +36,6 @@
     3：没有*、->操作符重载，因为shared_array持有的不是一个普通指针。
     4：析构函数使用delete[]释放资源，而不是delete。
 
- 
-————————————————
-版权声明：本文为CSDN博主「ajioy」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/ajioy/article/details/7376987
       
   4》weak_ptr引入弱引用计数解决资源不能释放
   weak_ptr使用shared_ptr来创建，来共享但不拥有资源，其不支持*和->来操作。
