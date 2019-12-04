@@ -8,6 +8,7 @@
     1）auto_ptr对象之间的赋值会移交所有权
     2）不能指向一组对象
     3）不能和STL容器共同使用
+     auto_ptr无能力自定义删除器
   
   C++11的三种智能指针都在<memory>头文件中
   2》unique_ptr 是auto_ptr的改进
