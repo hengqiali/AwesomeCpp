@@ -1,0 +1,52 @@
+https://blog.csdn.net/custa/article/details/5674434
+
+#include <iostream>
+using namespace std;
+
+class A {
+public:
+	void action() {
+		cout << "Action in class A!" << endl;
+	}
+};
+
+class B {
+	A a;
+public:
+	A* operator->() {
+		return &a;
+	}
+	void action() {
+		cout << "Action in class B!" << endl;
+	}
+};
+
+class C {
+	B b;
+public:
+	B operator->() {
+		return b;
+	}
+	/*
+	B* operator->() {
+		return &b;
+	}
+	C* operator->() {
+		return new C;
+	}
+	*/
+	
+	void action() {
+		cout << "Action in class C!" << endl;
+	}
+};
+
+int main(int argc, char *argv[])
+{
+	C* pc = new C;
+	pc->action();   //pc是C指针，调用->默认含义
+	C c;
+	c->action();  //c为对象，递归调用operator->()成员函数，直到返回值为指针，再调用指针所在类的action()
+	getchar();
+	return 0;
+}
