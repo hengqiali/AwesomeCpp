@@ -9,6 +9,32 @@ using namespace std;
 
 **********************************************/
 
+#include <iostream>
+
+using namespace std;
+
+class Rational {
+
+public:
+	// explicit Rational(int numerator = 0, int denominatoro = 1) :a(numerator), b(denominatoro) { cout << "a = " << a << "b" << b << endl; }  //如果限制隐式转换，oneEight * 2编译不过
+	Rational(int numerator = 0, int denominatoro = 1) :a(numerator), b(denominatoro) { cout << "a = " << a << "b" << b << endl; }
+	const Rational operator*(const Rational &rhs)
+	{
+		return Rational(a*rhs.a, b*rhs.b);
+	}
+private:
+	int a, b;
+};
+
+int main()
+{
+	Rational oneEight(1, 8);
+	Rational result = oneEight * 2;  //相当于oneEight.operator*(2),编译器知道传递了一个int，而函数需要的是Rational,而它又发现构造函数支持隐式转换，所以先调用构造函数，再进行运算
+	// 等价于 const Rantional tmp(numerator=2), result = oneEight * tmp;
+	return 0;
+}
+
+////////////////////////////////////////////////////////////
 
 class String{
     public:
