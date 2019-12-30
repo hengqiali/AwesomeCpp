@@ -1,0 +1,23 @@
+https://www.cnblogs.com/danshui/archive/2012/01/02/2310114.html  回调函数
+https://www.runoob.com/w3cnote/cpp-func-pointer.html 函数指针和类成员函数指针
+
+#include <iostream>
+
+using namespace std;
+
+double test(double c)
+{
+	return c;
+}
+
+int main()
+{
+	//函数指针的使用中，有没有typedef的区别
+	typedef double(*test2)(double);
+	test2 tt = test;
+	cout << tt(5.6) << endl;
+
+	double(*aliasTest)(double) = test;
+ 	cout << aliasTest(5.6) << endl;
+	return 0;
+}
