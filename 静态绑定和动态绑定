@@ -1,0 +1,46 @@
+#include <iostream>
+
+using namespace std;
+
+class B {
+public:
+	void mf() { cout << "B" << endl; }  //非虚函数是静态绑定，下面输出B D，若是虚函数，则是动态绑定，输出D D
+	virtual void name(int i = 2)
+	{
+		cout << "B" << " " << i << endl;
+	}
+};
+
+class D : public B
+{
+public:
+	void mf() { cout << "D" << endl; }
+	virtual void name(int i = 4)
+	{
+		cout << "D" << " " << i << endl;
+	}
+};
+int main()
+{
+	//绝不重新定义继承而来的非虚函数，因为非虚函数是静态绑定
+	//pb的静态类型是B*，动态类型是D*
+	D d;
+	B *pb = &d;  //pb的动态类型是D*，静态类型是B*，所以静态绑定的行为取决于静态类型
+	D *pd = &d;
+	pb->mf();
+	pd->mf();
+
+	/*
+	B b;
+	B *pb = &b;
+	//D *pd = &b; // 基类对象不能初始化子类对象
+	pb->mf();
+	pd->mf();
+	*/
+
+	//绝不重新定义继承而来的虚函数的缺省参数值，因为缺省参数值是静态绑定，而虚函数是动态绑定
+	pb->name();
+	pd->name();
+	
+	return 0;
+}
