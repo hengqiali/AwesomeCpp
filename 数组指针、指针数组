@@ -1,0 +1,17 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{	
+	//区分这个问题核心在，*和[]的优先级：() > [] > *，以及数组指针到底是指针还是数组，指针数组到底是数组还是指针？
+    //https://blog.csdn.net/sszgg2006/article/details/7317877
+	//https://blog.csdn.net/qsyzb/article/details/9567463
+	double(*arr1)[6] = new double[10][6];  // 数组指针，因为()优先级最高，所以arr1其实是个指针，这个指针指向了一个6个double型的一维数组，即arr1指针每加1代表它会跨过6个double的长度
+	double *arr2[6];   // 指针数组，[]优先级高，所以arr2首先是个数组，其每个元素是个double*的指针
+	double arr3[10][6]; // 数组数组
+	double **arr4 = new double*[10];  //指针的指针
+
+	return 0;
+}
