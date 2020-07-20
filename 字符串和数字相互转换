@@ -8,6 +8,12 @@ int main()
 {
     /******************   <sstream> stringstream     ******************/
     //把int转换成字符串，把int和字符串连接起来
+	int a = 123;
+	double b = 564.3;
+	string sa = to_string(a);
+	string sb = to_string(b);
+	cout << sa << endl << sb << endl;
+	
 	stringstream s0;
 	char s1[] = "789";
 	string s2("56.5");
@@ -15,7 +21,7 @@ int main()
 	s0 << "hello" << 123 << s1 << s2_; //把所有内容读进s0，可以有空格
 	s0 << s2;
 
-    string s3 = s0.str();
+    string s3 = s0.str();  //string s3; s0 >> s3;
 	cout << s3 << endl;
     //把string或char*类型的字符串转换成int
 	double y;
@@ -38,6 +44,8 @@ int main()
     string s6("1243");
     int x = std::atoi(s6.c_str());  // atol(long), atof(float), atod(double) 等
     cout << x << endl;
+	int xx = stoi(s6);
+	cout << xx << endl;
 
 
 	return 0;
