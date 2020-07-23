@@ -1,9 +1,12 @@
-https://www.cnblogs.com/yanqi0124/p/3808286.html
+
 #include <iostream>
 #include <vector>
 
 using namespace std;
-
+//reverse_iterator的base成员函数返回一个"对应的"正向iterator”，此说法其实并不准确。
+//对于插入操作而言，直接在ri.base()（返回的是正向迭代器的位置，即ri的位置向右移一位）位置插入元素等于在反向迭代器ri的插入效果（但是insert和erase函数不支持反向迭代器，所以需要base函数）
+//但是对于删除操作，并非如此。当需要把reverse_iterator转换成iterator的时候，由于ri.base()在ri的右一位，所以需要使用(ri++).base()来获取原来的需要删除的正向迭代器的位置
+//关于reverse_iterator的base()函数的具体意义和使用参考（讲的简单清晰） https://www.cnblogs.com/yanqi0124/p/3808286.html
 int main()
 {
 	vector<int> v;
