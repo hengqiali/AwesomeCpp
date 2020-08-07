@@ -4,43 +4,53 @@ using namespace std;
 
 class B {
 public:
-	void mf() { cout << "B" << endl; }  //非虚函数是静态绑定，下面输出B D，若是虚函数，则是动态绑定，输出D D
-	virtual void name(int i = 2)
+	void mf() { cout << "mfB" << endl; }  
+	virtual void name(int i)
 	{
-		cout << "B" << " " << i << endl;
+		cout << "nameB" << " " << i << endl;
+	}
+	virtual void sex()
+	{
+		cout << "sexB" << endl;
 	}
 };
 
 class D : public B
 {
 public:
-	void mf() { cout << "D" << endl; }
-	virtual void name(int i = 4)
+	void mf(int i) { cout << "mfD" << endl; }
+	virtual void name(double i)
 	{
-		cout << "D" << " " << i << endl;
+		cout << "nameD" << " " << i << endl;
+	}
+	virtual void sex()
+	{
+		cout << "sexD" << endl;
 	}
 };
 int main()
 {
-	//绝不重新定义继承而来的非虚函数，因为非虚函数是静态绑定
-	//pb的静态类型是B*，动态类型是D*
-	D d;
-	B *pb = &d;  //pb的动态类型是D*，静态类型是B*，所以静态绑定的行为取决于静态类型
-	D *pd = &d;
-	pb->mf();
-	pd->mf();
-
-	/*
-	B b;
-	B *pb = &b;
-	//D *pd = &b; // 基类对象不能初始化子类对象
-	pb->mf();
-	pd->mf();
-	*/
-
-	//绝不重新定义继承而来的虚函数的缺省参数值，因为缺省参数值是静态绑定，而虚函数是动态绑定
-	pb->name();
-	pd->name();
+	// 只有虚函数的重写（也就是多态）才是动态绑定，其行为取决于动态类型
+	// 其他诸如重写的虚函数的默认参数、虚函数的覆盖、非虚函数的重写和覆盖都是静态绑定，只会调用静态类型的行为
 	
+	//pb1的静态类型是B*，动态类型是B*
+	//pb2的静态类型是B*，动态类型是D*
+	D d;
+	B b;
+	B *pb1 = &b;  
+	B *pb2 = &d; //pb2的动态类型是D*，静态类型是B*，所以静态绑定的行为取决于静态类型
+
+	// 很显然，pb1,pb2的静态类型是B*,而mf是非虚函数的覆盖（重写也一样），所以是静态绑定，只会调用B*的方法，而不管动态类型是什么
+	pb1->mf();
+	pb2->mf();
+
+	// pb1,pb2的静态类型是B*,而name是虚函数的覆盖，所以是静态绑定，只会调用B*的方法，而不管动态类型是什么
+	pb1->name(2);
+	pb2->name(3);
+
+	// pb1,pb2的静态类型是B*,而sex是虚函数的重写，所以是动态绑定，pb1调用动态类型B*的方法，pb2调用动态类型D*的方法
+	pb1->sex();
+	pb2->sex();
+
 	return 0;
 }
