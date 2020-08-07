@@ -1,1 +1,35 @@
 http://feihu.me/blog/2014/the-origin-and-usage-of-typename/
+
+1. typename的第一个作用
+  在模板中，和class的作用一样，声明模板类型的表示字母
+  例如 template <class T>和 template <typename T> 功能一样
+
+2. typename的第二个作用
+  用来说明“带依赖型别”而不是一个数据成员，如下例：
+  
+  //模板类
+  template<class T>
+  class MyClass{
+    typedef vector<T> type;
+  };
+  
+  //模板的一个特化
+  class Wine{...};
+  template<>
+  class MyClass<Wine>{
+    private:
+      enum class WineType{
+        White, Red, Rose
+      };
+      WineType type;
+  };
+  
+   //现在假如有一个新的模板类使用了上面的MyClass类
+   MyClass<xxx>::type v;   //如果xxx是一个具体的类型，则此时不要typename来声明type是一个类型而非一个数据成员
+   template<class T>
+   class Widget{
+   private:
+      typename MyClass<T>::type v;  // 由于T是个模板类型，此时若如上面所述一样，如果有个Wine的MyClass的特化类，则此时type是个数据成员；所以为了让编译器知道type是个类型，必须用typename来声明
+   };
+   
+   
