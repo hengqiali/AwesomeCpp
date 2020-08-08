@@ -1,0 +1,29 @@
+1. 首先对万能引用的参数推导的理解（其本质是引用重叠）
+   template <class T>
+   void f(T&& param);  //param现在是个万能引用
+   int x = 28;
+   f(x);   //对f(x)调用，x是个左值，T的类型被推导为引用类型int &, 所以现在param变成 int& &&，引用重叠为int & (引用重叠只能由编译器完成，人为不行)，所以param类型是个左值引用
+   f(28);  //28个右值，T的类型被推导为非引用类型int, 所以现在param变成int&&,无需发生引用重叠，所以param是个右值引用
+
+2. move和forward的理解
+   move的真实作用只是把参数类型无条件强制转换为右值（move作用就到此），那为啥有移动功能呢？是因为强转为右值后，无论调用赋值、构造函数此时都会调用移动版本
+   move的示例实现,参数是个万能引用，根据1拿到T的参数类型后，拿到去除T的引用后的类型再加上&&组成右值类型，强制转换后返回。
+   template<class T>
+   typename remove_reference<T>::type&& move(T&& param){
+       using ReturnType = typename remove_reference<T>::type&&;
+       return static_cast<ReturnType>(param);
+   }
+
+   forward的真实作用和万能引用一起搭配，若参数是左值则将左值引用转发出去，若参数是右值，则将右值引用转发出去，即完美转发
+   forward的实现其实是利用了引用重叠
+   template <class T>
+   void f(T&& param){
+      someFunc(std::forward<T>(param));
+   }
+
+   template<class T>
+   T&& forward(typanem remove_reference<T>::type& param){  
+       return static_cast<T&&>(param);
+   }
+
+3. 推荐move用于右值引用，forward用于万能引用，因为声明为右值肯定是想提高效率用于移动最好，但是为左值时不一定需要移动，因为移动会析构原来的值
