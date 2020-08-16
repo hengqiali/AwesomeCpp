@@ -15,4 +15,4 @@
 ### 还有一个特例就是字符数组作为函数参数时，实际是一个指针，所以对函数参数是数组的字符取sizeof时要注意
 
 ## 具体的例子结合上面的原理和下面这篇文章绝对会掌握和明白！
-### [https://zhuanlan.zhihu.com/p/93054021?utm_source=wechat_session&utm_medium=social&utm_oi=752170274572500992](strlen和sizeof)
+### [strlen和sizeof](https://zhuanlan.zhihu.com/p/93054021?utm_source=wechat_session&utm_medium=social&utm_oi=752170274572500992)
