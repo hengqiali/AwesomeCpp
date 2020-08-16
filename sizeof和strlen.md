@@ -1,4 +1,4 @@
-#对一个字符串进行sizeof和strlen的区别
+# 对一个字符串进行sizeof和strlen的区别
 对于一个字符串而言，可能有三种形式，一种是字符数组的形式，一种是字符指针形式，一种是string类型；
 1. 对于string类型
    内存占用和具体的库对string类的实现方式有关，4字节、12、28字节都有可能
@@ -12,7 +12,7 @@
    sizeof对于任何类型的指针都是32位机器对应4字节，64位机器对应8字节
    strlen的计算方式和字符数组计算方式一样
 
-###还有一个特例就是字符数组作为函数参数时，实际是一个指针，所以对函数参数是数组的字符取sizeof时要注意
+### 还有一个特例就是字符数组作为函数参数时，实际是一个指针，所以对函数参数是数组的字符取sizeof时要注意
 
-##具体的例子结合上面的原理和下面这篇文章绝对会掌握和明白！
-###https://zhuanlan.zhihu.com/p/93054021?utm_source=wechat_session&utm_medium=social&utm_oi=752170274572500992
+## 具体的例子结合上面的原理和下面这篇文章绝对会掌握和明白！
+### [https://zhuanlan.zhihu.com/p/93054021?utm_source=wechat_session&utm_medium=social&utm_oi=752170274572500992](strlen和sizeof)
