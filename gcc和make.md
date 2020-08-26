@@ -11,7 +11,7 @@ C编译过程主要包括预编译、编译、汇编、链接四大过程
 #### [C编译四大过程文章二](https://www.cnblogs.com/CarpenterLee/p/5994681.html)
 
 
-make和makefile
+make和makefile     
 make其实是个命令，而gcc\g++是个编译器，make通过makefile指定的一系列目标以及前置条件来执行对应的命令行
 ### 参考下面两个文章 
 #### [make和makefile一](https://www.ruanyifeng.com/blog/2015/02/make.html)
