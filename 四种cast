@@ -2,7 +2,7 @@
 
 /*********************************************
 
-    C++  static_cast  const_cast dynamic_cast
+    C++  static_cast  const_cast dynamic_cast reinterpret_cast
 
 *********************************************/
 void foo(int *num) //用于测试const_cast
@@ -52,9 +52,22 @@ int main()
     // 2. 当一个量定义为const，函数形参要求是non_const时，可使用const_cast去掉const传递
     //foo(&constant); //error: invalid conversion from 'const int*' to 'int*' [-fpermissive]|
     foo(const_cast<int *>(&constant));
+    
+    
+    /********  reinterpret_cast  *********/
+    //什么类型转换都可以实现，但是其不会改变值，但是会从位模式上重新解释原来的值，可能会造成结果不一致，所以不建议使用
 
     /********  dynamic_cast  *********/
-    //用于将基类的指针或引用安全地转换成派生类的指针或引用
+    //用于多态类型之间进行转换，支持向上，向下、横向类型间转换，在执行期会动态检查安全性
+    //https://www.cnblogs.com/weidagang2046/archive/2010/04/10/1709226.html
+    //https://blog.csdn.net/hongkangwl/article/details/21161713
+    
+    
+    
+    /***************  为什么不用C语言的强制转换方式呢？？ ************/
+    1) 首先C语言的强制类型转换不够明确，比较暴力，不能进行错误检查，容易出错；
+        C++的强制类型转换可能根据需求不同选择不同的cast进行转换
+    2) 同时，C++的强制转换提供了类型转换安全检查，且功能强大
 
     return 0;
 }
