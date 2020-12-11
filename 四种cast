@@ -56,6 +56,24 @@ int main()
     
     /********  reinterpret_cast  *********/
     //什么类型转换都可以实现，但是其不会改变值，但是会从位模式上重新解释原来的值，可能会造成结果不一致，所以不建议使用
+    //https://zhuanlan.zhihu.com/p/33040213
+    int num = 0x00636261;
+    int *pnum = &num;
+    //char *psnum = pnum;  //出错，不能直接转换
+    char *ps2num = reinterpret_cast<char *> (pnum);
+    //char *ps3num = static_cast<char *>(pnum);  //出错，不允许int*到char*的强制转换
+    cout << hex << *pnum << endl;
+    //cout << *psnum << endl;
+    cout << *ps2num << endl;
+    cout << ps2num << endl;
+    //cout << ps3num << endl;
+    //double *dum = pnum;  //出错，不能直接转换
+    double *dnum = reinterpret_cast<double*>(pnum);
+    //double *d2num = static_cast<double*>(pnum);  //出错，不允许int*到double*的强制转换
+    cout << *dnum << endl;
+    //cout << *d2num << endl;
+
+
 
     /********  dynamic_cast  *********/
     //用于多态类型之间进行转换，支持向上，向下、横向类型间转换，在执行期会动态检查安全性
