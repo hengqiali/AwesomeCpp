@@ -3,6 +3,7 @@ smart_ptr.h
 #include <functional>
 
 // 模仿shared_ptr实现一个智能指针
+// 首先，share_ptr是不推荐指向数组的，所以默认delete
 template <typename T>
 class smart_ptr
 {
