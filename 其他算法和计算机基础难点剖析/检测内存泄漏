@@ -1,0 +1,5 @@
+1. windows下通过在代码中加入crtdbg_map_alloc宏及相关函数[检测、定位内存泄漏](https://www.cnblogs.com/skynet/archive/2011/02/20/1959162.html)
+
+2. Linux下通过[valgrind](https://blog.csdn.net/gatieme/article/details/51959654)无需重新编译就可以检测定位;
+              
+              [mtrace](https://blog.csdn.net/u010318270/article/details/73603723)使用方法和CRT运行库类似
