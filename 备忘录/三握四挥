@@ -1,0 +1,1 @@
+[三握：SYN_SEND,SYN_RCVD,ESTABLISHED, SYN不能携带数据但要消耗一个序号因为连接未建立，第三次握手ACK可以携带数据因为连接已经建立，第二次握手不能携带，如果不携带则不消耗序号; 四挥：FIN_WAIT_1，CLOSE_WAIT,FIN_WAIT_2,LAST_ACK, TIME_WAIT(等待2MSL),CLOSED，FIN报文可以携带数据因为连接未释放，不管携不携带，都要消耗一个序号](https://cloud.tencent.com/developer/article/1546825)
