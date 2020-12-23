@@ -62,8 +62,6 @@ smart_ptr<T>::smart_ptr(const smart_ptr& rhs)
 template <typename T>
 smart_ptr<T>& smart_ptr<T>::operator =(const smart_ptr &rhs)
 {
-	// 使用rhs的deleter
-	m_del = rhs.m_del;
 	// 递增右侧运算对象的引用计数
 	++(*rhs.m_p_use_count);
 	// 递减本对象的引用计数
