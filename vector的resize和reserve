@@ -1,0 +1,6 @@
+reserve是预留空间大小，在vector初始化的时候，如果调用vector(){...}，则begin_=end_，也就是size() = end_-begin_ = 0, 但是cap_ = 16; 若调用vector(n){...}或者vector(n, v)，
+此时end_ = begin_ + n, cap_ = begin_ + max(n, 16)， reserve预留的空间可以干嘛？？ 当你push_back的时候，其是判断 end_ != cap_则插入，否则构造新的空间再插入，所以reserve的空间可以用来插入
+新的元素，但是！！，当你调用operator[]来访问元素时，其判断是 n < size(),而size返回end_ - begin_， 也就是访问的时候并不能访问超过end_的在reserve空间内的元素！！
+
+resize是改变vector内实际元素的个数，毕竟size()函数也是返回vector中的实际元素的个数end_ - begin_，其改变的过程中有三点：（1）当resize的个数小于size()时，先remove和destroy多余的对象，cap_不变；
+（2）当resize的个数大于等于size()并且小于cap_时，其会插入value对象，cap_不变；（3）当resize的个数大于cap_时，分配新的空间，然后复制Old元素插入新的元素，并拥有一个更大的cap_
