@@ -1,0 +1,1 @@
+[deque的底层实现是分段定量连续空间，要清楚其实现逻辑，必须关注好以下几个变量的含义及用法：map_pointer map, map_size, start, finish, __deque_iterator里面的cur, first, last, node, num_nodes, nstart, nfinish](https://blog.csdn.net/yl_puyu/article/details/103361874)
