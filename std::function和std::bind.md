@@ -4,7 +4,7 @@
 
 在 ``<functional>`` 头文件中， std::function 是个可调用Callable对象的容器，可以容纳 函数、函数指针、lambda表达式、成员函数等
 
-```
+```c++
 #include <functional>
 #include <iostream>
 
