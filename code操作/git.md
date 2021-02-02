@@ -70,10 +70,14 @@
 
 33. 当多个人在修改了同一分支上的东西且在同一分支提交时，需要先pull解决冲突，再add commit，即可
 
-34. 在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致
+34. git fetch origin 会更新origin远程仓库的所有远程分支的最新commit id到本地的.git/FETCH_HEAD文件中，更新本地的远程分支信息，使用git diff来查看，git  merge这个分支，git pull相当于自动merge
 
-35. git tag + tag_name + [commit_id] 表示在commit_id对应的提交上打标签，默认打在HEAD的提交处，git tag可以查看所有标签
+35. 在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致
 
-36. git tag -d + tag_name删除标签，提交到远程使用git push origin + tag_name
+36. git tag + tag_name + [commit_id] 表示在commit_id对应的提交上打标签，默认打在HEAD的提交处，git tag可以查看所有标签
 
-37. git clean时清除本地没有track的文件
+37. git tag -d + tag_name删除标签，提交到远程使用git push origin + tag_name
+
+38. git clean时清除本地没有track的文件
+
+39. [git merge和git rebase的区别](https://juejin.cn/post/6844903603694469134)
