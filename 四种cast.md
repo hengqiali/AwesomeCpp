@@ -1,3 +1,4 @@
+```c++
 #include <iostream>
 
 /*********************************************
@@ -34,6 +35,7 @@ int main()
     // 1. const_cast绝对不能改变const修饰的常量的值
     // 2. 当一个量定义为const，函数形参要求是non_const时，可使用const_cast去掉const传递
     // 3. 当一个量是non_const，却使用一个const指针指向它，若需要修改其，使用const_cast
+    //[当企图对一个const变量使用const_cast赋值给non const指针指向来修改其值时，虽然地址相同但值却不同，这是未定义且不安全的行为，尽量避免](https://www.cnblogs.com/QG-whz/p/4513136.html)
 
     // 1. const_cast绝对不能改变const修饰的常量的值
     const int constant = 25;  //如果带const不能通过去const指针来修改
@@ -89,3 +91,4 @@ int main()
 
     return 0;
 }
+```
