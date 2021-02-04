@@ -81,3 +81,5 @@
 38. git clean时清除本地没有track的文件
 
 39. [git merge和git rebase的区别](https://juejin.cn/post/6844903603694469134)
+
+40. git revert + commid-id 本地和远程都回退到某个版本
