@@ -1,33 +1,34 @@
+### C++ 空指针  NULL、0 和 nullptr
 
-/***////////////////////////////////////
-
-            C++ 空指针
-            
-           NULL 和 nullptr
-           
   1. 以往我们使用NULL表示空指针。它实际上是个为0的int、long类整型值。下面的代码会产生岐义：
+
     void f(int i) {} // chose this one
     void f(const char* s) {}
-
+    
     f(NULL);
-  2. 为此C++ 11新增类型nullptr_t，它只有一个值nullptr。上面的调用代码可以写成: 
+  2. 为此C++ 11新增类型nullptr_t，它只有一个值nullptr, 可以避免整型和指针的误用。上面的调用代码可以写成: 
+
     void f(int i) {}
     void f(const char* s) {} // chose this one
-
+    
     f(nullptr);
-           
+
 例子：
+
+
+```c++
 #include <iostream>
 
 using namespace std;
 
 //当没有f(int a)时，都会调用f(int*),0和NULL都会被解释成空指针
 //但当有f(int a)时，0和NULL永远不会调到f(int *)，只会调用f(int *)
-//**** 上面的情况在没有模板时的确是那样，0和NULL都有可能被解释成空指针，但是模板时，0和NULL只会被编译器解释成整型，而不能转换成指针***
-//void f(int a)
-//{
-//	cout << "f_int" << endl;
-//}
+// 上面的情况在没有模板时的确是那样，0和NULL都有可能被解释成空指针，但是模板时，0和NULL只会被编译器解释成整型，而不能转换成指针***
+
+void f(int a)
+{
+	cout << "f_int" << endl;
+}
 
 void f(int *a)
 {
@@ -42,4 +43,4 @@ int main()
 
 	return 0;
 }
-           
+```
