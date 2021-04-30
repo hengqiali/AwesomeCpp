@@ -22,7 +22,7 @@
 using namespace std;
 
 //当没有f(int a)时，都会调用f(int*),0和NULL都会被解释成空指针
-//但当有f(int a)时，0和NULL永远不会调到f(int *)，只会调用f(int *)
+//但当有f(int a)时，会发生参数int和int*的函数重载，0和NULL此时会被识别调用f(int)，而nullptr会调用f(int *)
 // 上面的情况在没有模板时的确是那样，0和NULL都有可能被解释成空指针，但是模板时，0和NULL只会被编译器解释成整型，而不能转换成指针***
 
 void f(int a)
