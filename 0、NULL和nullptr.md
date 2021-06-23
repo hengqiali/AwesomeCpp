@@ -1,5 +1,7 @@
 ### C++ 空指针  NULL、0 和 nullptr
 
+#### 小点子：free(nullptr)不会发生任何问题，nullptr可以转换成任意类型的指针，但是！void\* 不能隐式的转换成其他类型的指针
+
   1. 以往我们使用NULL表示空指针。它实际上是个为0的int、long类整型值。下面的代码会产生岐义：
 
     void f(int i) {} // chose this one
